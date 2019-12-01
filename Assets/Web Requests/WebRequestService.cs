@@ -15,7 +15,14 @@ public class WebRequestService : MonoBehaviour
         {
             yield return unityWebRequest.SendWebRequest();
 
-            Debug.Log(unityWebRequest.downloadHandler.text);
+            if(unityWebRequest.isNetworkError)
+            {
+                Debug.Log(unityWebRequest.error);                
+            }
+            else
+            {
+                Debug.Log(unityWebRequest.downloadHandler.text);
+            }
         }
     }
 }
