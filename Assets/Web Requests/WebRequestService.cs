@@ -4,6 +4,9 @@ using UnityEngine.Networking;
 
 public class WebRequestService : MonoBehaviour
 {
+    [SerializeField]
+    private SpriteRenderer _spriteRenderer;
+
     private void Start()
     {
         StartCoroutine(GetCoroutine("https://jsonplaceholder.typicode.com/todos/1"));
@@ -40,7 +43,10 @@ public class WebRequestService : MonoBehaviour
             else
             {
                 DownloadHandlerTexture downloadHandlerTexture = unityWebRequest.downloadHandler as DownloadHandlerTexture;
-                var texture = downloadHandlerTexture.texture;
+                Sprite sprite = Sprite.Create(downloadHandlerTexture.texture, 
+                    new Rect(0, 0, downloadHandlerTexture.texture.width, downloadHandlerTexture.texture.height),
+                    new Vector2(0.5f, 0.5f));
+                _spriteRenderer.sprite = sprite;                
             }
         }        
     }
